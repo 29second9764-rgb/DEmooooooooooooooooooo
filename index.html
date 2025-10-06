@@ -20,17 +20,15 @@
             overflow: hidden;
         }
 
-        /* Simulate the blurred stadium background.
-            *** IMPORTANT: Apni stadium background image ki URL yahan 'YOUR_STADIUM_BACKGROUND_URL_HERE' ki jagah daaliye. ***
-        */
+        /* Simulate the blurred stadium background. */
         .stadium-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* --- PLACEHOLDER: REPLACE WITH YOUR BACKGROUND IMAGE URL --- */
-            background-image: url('YOUR_STADIUM_BACKGROUND_URL_HERE'); 
+            /* BACKGROUND IMAGE PATH: Updated to 'images/stadium_background.jpg' */
+            background-image: url('./images/stadium_background.jpg'); 
             background-size: cover;
             background-position: center;
             filter: blur(8px) brightness(0.7); /* Maintain the blur effect */
@@ -139,8 +137,8 @@
                 
                 <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
                     <img
-                        /* --- PLACEHOLDER: REPLACE WITH YOUR LOGO IMAGE URL --- */
-                        src="YOUR_LOGO_IMAGE_URL_HERE"
+                        /* LOGO IMAGE PATH: Updated to 'images/imageyour_logo.png' */
+                        src="./images/imageyour_logo.png"
                         onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=BOOK+ANNA';"
                         alt="Company Logo"
                         class="w-full h-full object-contain rounded-full"
