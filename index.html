@@ -118,7 +118,22 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
-</head>
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '882738077876855');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=882738077876855&ev=PageView&noscript=1"
+    /></noscript>
+    </head>
 <body>
 
     <div class="stadium-bg"></div>
@@ -170,8 +185,8 @@
     
     <script>
         // --- Configuration ---
-        // WhatsApp Number (Thai number +66 86 418 3906)
-        const WHATSAPP_PHONE_NUMBER = '66864183906'; 
+        // WhatsApp Number (Updated to Indian number)
+        const WHATSAPP_PHONE_NUMBER = '918425890638'; 
         
         // Default Message - Set to Thai/English friendly greeting
         const DEFAULT_MESSAGE = "Hello,i want 🆔";
@@ -211,6 +226,11 @@
                     clearInterval(timer);
                     ctaButtonText.innerHTML = 'Redirecting Now...';
                     
+                    // Trigger Pixel Lead Event before redirecting
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead');
+                    }
+                    
                     // Trigger the link
                     window.location.href = ctaLink.href;
                 }
@@ -218,6 +238,10 @@
             
             // Allow user to click immediately if they don't want to wait
             ctaLink.onclick = () => {
+                // Trigger Pixel Lead Event on click
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Lead');
+                }
                 clearInterval(timer);
                 return true; // Allow link navigation
             };
@@ -233,6 +257,3 @@
     </script>
 </body>
 </html>
-
-
-
