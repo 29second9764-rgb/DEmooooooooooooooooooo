@@ -64,7 +64,8 @@
             max-width: 400px; 
             width: 90%;
             animation: fadeIn 1s ease-out; 
-            padding-bottom: 3rem; 
+            /* ADJUSTED: Reduced padding at the bottom of the card */
+            padding-bottom: 2rem; 
             position: relative; 
             z-index: 10; 
             overflow: hidden; 
@@ -101,8 +102,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* --- POPUP NOTIFICATION STYLES (REMOVED) --- */
-        /* .win-popup styles and @keyframes popup-display are removed */
         
         /* --- COIN SHOWER CONTAINER --- */
         #coin-shower {
@@ -209,7 +208,8 @@
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 700;
-            margin-top: 40px; 
+            /* ADJUSTED: Reduced margin-top to bring the badge up */
+            margin-top: 20px; 
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-out 0.1s backwards;
         }
@@ -334,13 +334,6 @@
         const WIN_AMOUNTS = ['₹ 1.5 CR', '₹ 2.0 CR', '₹ 2.5 CR', '₹ 3.1 CR', '₹ 1.8 CR', '₹ 4.0 CR'];
         const USER_NAMES = ['Kiran S.', 'Ravi V.', 'Amit G.', 'Neha P.', 'Priya D.', 'Vikram R.', 'Zoya B.'];
         const TICKER_UPDATE_INTERVAL_MS = 4000; // Ticker bar update interval
-        // POPUP_INTERVAL_MS is no longer needed since the pop-up is removed
-
-        /* --- Pop-up function REMOVED ---
-        function triggerWinPopup() {
-            // ... function body removed
-        }
-        */
 
         function generateWinMessage() {
             const amount = WIN_AMOUNTS[Math.floor(Math.random() * WIN_AMOUNTS.length)];
@@ -357,8 +350,6 @@
             };
             updateTicker();
             setInterval(updateTicker, TICKER_UPDATE_INTERVAL_MS);
-
-            // 2. Popup Notification Trigger (Removed the pop-up logic)
         }
         /* --- END Win Ticker Functions --- */
 
