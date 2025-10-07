@@ -1,3 +1,11 @@
+<?php
+/*
+Template Name: Gaming ID Landing Page
+Template Post Type: page
+*/
+// Disable WordPress header and footer for a clean landing page look
+// This code ensures that only the content below is displayed.
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +35,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            /* ⚠️ IMPORTANT: Change the background-image path if you use it! */
             background-image: url('./images/stadium_background.jpg'); 
             background-size: cover; 
             background-position: center; 
@@ -64,42 +73,84 @@
             max-width: 400px; 
             width: 90%;
             animation: fadeIn 1s ease-out; 
-            /* ADJUSTED: Reduced padding at the bottom of the card */
             padding-bottom: 2rem; 
             position: relative; 
             z-index: 10; 
             overflow: hidden; 
         }
 
-        /* --- WIN NOTIFICATION TICKET STYLES (Ticker Bar) --- */
+        /* --- WIN NOTIFICATION STYLES (Realistic Mobile Notification) --- */
         #win-notification {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: #10b981; 
-            color: #000;
-            font-weight: 700;
+            position: fixed; 
+            top: 10px; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%; 
+            max-width: 380px; 
+            min-height: 55px;
+            /* UPDATED: Darker, realistic notification style */
+            background-color: rgba(40, 40, 40, 0.95); 
+            color: #fff; /* White text for contrast */
+            font-weight: 500;
             font-size: 0.875rem;
             display: flex;
+            flex-direction: column; /* Stack header and body */
+            align-items: flex-start;
+            padding: 8px 15px;
+            border-radius: 14px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.1);
+            z-index: 50; 
+            opacity: 0; 
+            pointer-events: none; 
+            text-align: left;
+            backdrop-filter: blur(10px); /* Add blur effect for realism */
+        }
+        
+        .notification-header {
+            display: flex;
             align-items: center;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 0 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            animation: slideDown 0.5s ease-out 0.2s backwards;
-            z-index: 11;
+            margin-bottom: 4px;
+            width: 100%;
         }
 
-        #win-notification-text {
-            display: inline-block;
-            animation: marquee 10s linear infinite; 
+        .app-icon {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            background-color: #ffd700; /* Gold color for icon */
+            margin-right: 6px;
         }
 
-        @keyframes marquee {
-            0%   { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .app-name {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #ccc;
+        }
+
+        .notification-body {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        /* Animations for Notification IN/OUT */
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        @keyframes fadeSlideOut {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, -20px); }
+        }
+        
+        .show-notification {
+            animation: fadeSlideIn 0.5s forwards;
+            pointer-events: auto; 
+        }
+
+        .hide-notification {
+            animation: fadeSlideOut 0.5s forwards;
         }
 
         
@@ -208,7 +259,6 @@
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 700;
-            /* ADJUSTED: Reduced margin-top to bring the badge up */
             margin-top: 20px; 
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-out 0.1s backwards;
@@ -268,11 +318,16 @@
     
     <div id="coin-shower"></div>
 
+    <div id="win-notification">
+        <div class="notification-header">
+            <div class="app-icon"></div>
+            <span class="app-name">Game Access</span>
+        </div>
+        <div id="win-notification-text" class="notification-body"></div>
+    </div>
+
     <div id="main-card" class="card rounded-2xl flex flex-col justify-between">
         
-        <div id="win-notification">
-            <span id="win-notification-text"></span>
-        </div>
 
         <div class="p-6">
             <div class="flex flex-col items-center mb-10 pt-6">
@@ -285,8 +340,8 @@
                     
                     <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
                         <img
-                            /* LOGO IMAGE PATH: Updated to 'images/imageyour_logo.png' */
-                            src="./images/imageyour_logo.png"
+                            /* WP CHANGE: Use the template directory to find the image */
+                            src="<?php echo get_template_directory_uri(); ?>/images/imageyour_logo.png"
                             onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
                             alt="Company Logo"
                             class="w-full h-full object-contain rounded-full"
@@ -315,7 +370,7 @@
                     id="cta-button"
                     class="cta-button w-full flex items-center justify-center py-4 px-6 text-black rounded-full transition duration-300 uppercase"
                 >
-                    <span id="cta-text">CLAIM ACCESS IN... 5s</span>
+                    <span id="cta-text">CLAIM ACCESS NOW</span>
                 </button>
             </a>
             <p class="text-center text-xs mt-3 text-gray-400 small-text-animate">⚡ Immediate connection to your agent.</p>
@@ -328,34 +383,58 @@
         const WHATSAPP_PHONE_NUMBER = '918425890638'; 
         const DEFAULT_MESSAGE = "Hello! I saw your ad and want to claim my Exclusive Gaming ID and the 10% welcome bonus right now.";
         const BONUS_DURATION_MINUTES = 5; 
-        const COIN_SHOWER_DURATION_SECONDS = 8; 
+        /* UPDATED: COIN SHOWER DURATION (12 seconds) */
+        const COIN_SHOWER_DURATION_SECONDS = 12; 
 
         // --- Win Notification Config ---
-        const WIN_AMOUNTS = ['₹ 1.5 CR', '₹ 2.0 CR', '₹ 2.5 CR', '₹ 3.1 CR', '₹ 1.8 CR', '₹ 4.0 CR'];
-        const USER_NAMES = ['Kiran S.', 'Ravi V.', 'Amit G.', 'Neha P.', 'Priya D.', 'Vikram R.', 'Zoya B.'];
-        const TICKER_UPDATE_INTERVAL_MS = 4000; // Ticker bar update interval
+        const WIN_AMOUNTS = ['₹ 2.0 CR', '₹ 2.5 CR', '₹ 3.1 CR', '₹ 4.0 CR', '₹ 5.2 CR', '₹ 1.8 CR', '₹ 3.5 CR'];
+        const USER_NAMES = ['Kiran S.', 'Ravi V.', 'Amit G.', 'Neha P.', 'Priya D.', 'Vikram R.', 'Zoya B.', 'Rajesh K.', 'Deepa A.', 'Mohan J.'];
+        const NOTIFICATION_DISPLAY_TIME_MS = 5000; 
 
         function generateWinMessage() {
             const amount = WIN_AMOUNTS[Math.floor(Math.random() * WIN_AMOUNTS.length)];
             const user = USER_NAMES[Math.floor(Math.random() * USER_NAMES.length)];
-            return `🎉 LIVE WINNER: ${user} just won **${amount}**! Claim your ID now! 🤑🤑🤑 `;
+            return `🎉 **Mega Win Alert!** ${user} just cashed out ${amount}! Claim your ID now. 💰`;
         }
 
-        function startWinTicker() {
-            const tickerTextElement = document.getElementById('win-notification-text');
-            
-            // 1. Ticker Bar Update (Continuous Scroll)
-            const updateTicker = () => {
-                tickerTextElement.innerHTML = generateWinMessage() + generateWinMessage(); 
+        function startNotificationLoop() {
+            const notificationBar = document.getElementById('win-notification');
+            const notificationText = document.getElementById('win-notification-text');
+
+            const showNextNotification = () => {
+                // 1. Hide the current one (if visible)
+                notificationBar.classList.remove('show-notification');
+                notificationBar.classList.add('hide-notification');
+                
+                setTimeout(() => {
+                    // 2. Update the text
+                    notificationText.innerHTML = generateWinMessage();
+                    
+                    // 3. Show the new one
+                    notificationBar.classList.remove('hide-notification');
+                    notificationBar.classList.add('show-notification');
+                    
+                    // 4. Set a timer to hide it before the next cycle starts
+                    setTimeout(() => {
+                        notificationBar.classList.remove('show-notification');
+                        notificationBar.classList.add('hide-notification');
+                    }, NOTIFICATION_DISPLAY_TIME_MS - 1000); // Hide 1 second before next one appears
+
+                }, 500); // Wait for the fadeOut animation (0.5s)
             };
-            updateTicker();
-            setInterval(updateTicker, TICKER_UPDATE_INTERVAL_MS);
-        }
-        /* --- END Win Ticker Functions --- */
 
-        /* --- Coin Drop Function --- */
+            // Start immediately
+            showNextNotification();
+            
+            // Repeat the cycle every 5 seconds (5000ms)
+            setInterval(showNextNotification, NOTIFICATION_DISPLAY_TIME_MS);
+        }
+        /* --- END Notification Functions --- */
+
+        /* --- Coin Drop Function (UPDATED) --- */
         function startCoinDrop() {
             const shower = document.getElementById('coin-shower');
+            // Use the updated duration
             const coinGenerationEndTime = Date.now() + (COIN_SHOWER_DURATION_SECONDS * 1000);
 
             const createCoin = () => {
@@ -375,62 +454,40 @@
                 }, (duration + delay) * 1000 + 500); 
             };
 
+            /* UPDATED: Coin interval to 50ms for high density */
             const coinInterval = setInterval(() => {
                 if (Date.now() < coinGenerationEndTime) {
                     createCoin();
                 } else {
                     clearInterval(coinInterval);
                 }
-            }, 100); 
+            }, 50); 
         }
         /* --- END Coin Drop Function --- */
 
 
         function updateCtaLink() {
             const ctaLink = document.getElementById('cta-link');
-            
+            const ctaButton = document.getElementById('cta-button');
+            const ctaText = document.getElementById('cta-text');
+
             if (!WHATSAPP_PHONE_NUMBER) {
                 ctaLink.href = '#';
-                document.getElementById('cta-text').textContent = '⚠️ Error: Number Missing';
-                document.getElementById('cta-button').disabled = true;
+                ctaText.textContent = '⚠️ Error: Number Missing';
+                ctaButton.disabled = true;
                 return;
             }
 
             const encodedMessage = encodeURIComponent(DEFAULT_MESSAGE);
             const whatsappLink = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodedMessage}`;
             ctaLink.href = whatsappLink;
-            document.getElementById('cta-button').disabled = false;
-        }
-
-        function autoRedirect(seconds) {
-            const ctaButtonText = document.getElementById('cta-text');
-            const ctaLink = document.getElementById('cta-link');
-
-            let count = seconds;
+            ctaButton.disabled = false;
             
-            ctaButtonText.innerHTML = `CLAIM ACCESS IN... ${count}s`;
-
-            const timer = setInterval(() => {
-                count--;
-                ctaButtonText.innerHTML = `CLAIM ACCESS IN... ${count}s`;
-                
-                if (count <= 0) {
-                    clearInterval(timer);
-                    ctaButtonText.innerHTML = 'REDIRECTING NOW...';
-                    
-                    if (typeof fbq === 'function') {
-                        fbq('track', 'Lead');
-                    }
-                    
-                    window.location.href = ctaLink.href;
-                }
-            }, 1000); 
-            
+            // Add Facebook Lead tracking on click
             ctaLink.onclick = () => {
                 if (typeof fbq === 'function') {
                     fbq('track', 'Lead');
                 }
-                clearInterval(timer);
                 return true; 
             };
         }
@@ -469,17 +526,16 @@
             }, 1000);
         }
 
-        // Initialize on load and start the redirect
+        // Initialize on load
         window.onload = function() {
             updateCtaLink(); 
             startBonusTimer(); 
             
             // Start all animations and dynamic content
             setTimeout(startCoinDrop, 100); 
-            startWinTicker(); 
+            startNotificationLoop(); // Start the new notification sequence
 
-            console.log("App Initialized. Starting automatic redirect.");
-            autoRedirect(5); 
+            console.log("App Initialized. Auto-redirect disabled.");
         }
     </script>
 </body>
