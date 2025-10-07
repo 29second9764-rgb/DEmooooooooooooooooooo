@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOOK ANNA - Secure Chat</title>
+    <title>CLAIM YOUR BONUS | Gaming Access</title> 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles for the dark, immersive background and neon effects */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        /* Custom fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Orbitron:wght@400..900&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Dark background fallback */
+            background-color: #0d1117; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,7 +20,7 @@
             overflow: hidden;
         }
 
-        /* Simulate the blurred stadium background. (DEFAULT: LAPTOP/DESKTOP) */
+        /* Background Image */
         .stadium-bg {
             position: absolute;
             top: 0;
@@ -28,27 +28,22 @@
             width: 100%;
             height: 100%;
             background-image: url('./images/stadium_background.jpg'); 
-            background-size: cover; /* Default behavior: cover screen, crops ends */
+            background-size: cover; 
             background-position: center; 
             filter: blur(2px) brightness(0.7); 
             z-index: -1;
         }
         
-        /* 🔥 FIX FOR PHONE SCREENS 🔥 */
-        /* Media query targets screens 480px wide or less (typical phones) */
+        /* MOBILE OPTIMIZATION */
         @media (max-width: 480px) {
             .stadium-bg {
-                /* Option 1: Use 'contain' to show the whole image (will create black bars on top/bottom) */
-                background-size: contain; 
-                background-repeat: no-repeat;
-                /* Option 2 (Alternative - uncomment to try): Keep 'cover' but force the focus to the top/center.
                 background-size: cover; 
-                background-position: center top; 
-                */
+                background-position: 50% 10%; 
+                background-repeat: no-repeat;
             }
         }
         
-        /* Dark overlay to enhance the card contrast */
+        /* Dark overlay for contrast */
         .stadium-bg::after {
             content: '';
             position: absolute;
@@ -56,79 +51,140 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.85);
         }
 
+        /* --- CARD GLOW EFFECT --- */
         .card {
-            backdrop-filter: blur(10px);
-            background-color: rgba(18, 18, 18, 0.75); /* Semi-transparent dark card */
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px); 
+            background-color: rgba(5, 5, 5, 0.9); 
+            /* NEW: Stronger, ambient gold glow */
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4), 0 0 50px rgba(255, 215, 0, 0.2); 
+            border: 1px solid rgba(255, 215, 0, 0.1); 
             min-height: 60vh; 
-            max-width: 400px; /* Mobile-first width */
+            max-width: 400px; 
             width: 90%;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 1s ease-out; 
             padding-bottom: 3rem; 
         }
 
-        /* Neon Glow effect for the logo ring */
+        /* --- LOGO RING ANIMATION --- */
         .neon-ring {
-            border: 2px solid #57fa78; /* Initial green border */
-            box-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e, inset 0 0 5px #22c55e;
+            border: 2px solid #FFD700; 
+            box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, inset 0 0 5px #FFD700;
             transition: all 0.3s ease;
+            /* NEW: Subtle glow pulse on the ring */
+            animation: ring-glow 3s infinite alternate; 
         }
 
-        .neon-ring:hover {
-            box-shadow: 0 0 15px #34d399, 0 0 30px #34d399, inset 0 0 8px #34d399;
+        @keyframes ring-glow {
+            0% { box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, inset 0 0 5px #FFD700; }
+            100% { box-shadow: 0 0 15px #FFC107, 0 0 30px #FFC107, inset 0 0 8px #FFC107; }
+        }
+
+        /* --- BONUS BADGE STYLES (Retained pulse) --- */
+        .bonus-badge {
+            background-color: #dc2626; 
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin-top: 10px;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.8);
+            animation: slideUp 0.5s ease-out, flash 1.5s infinite alternate 0.5s; 
         }
         
-        /* --- STICKER/CTA BUTTON STYLES --- */
+        /* --- BONUS TIMER STYLES --- */
+        .bonus-timer {
+            color: #FFD700; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 5px;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); /* Stronger text glow */
+            animation: slideUp 0.6s ease-out; 
+        }
+
+        /* --- Description Text --- */
+        .description-text {
+            animation: fadeIn 1s ease-out 0.7s backwards;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+        }
+        
+        /* --- CTA BUTTON STYLES (Jiggle retained) --- */
         .cta-button {
-            /* Base button style */
-            background-color: #25D366; 
+            background-color: #FFD700; 
+            color: #000; 
             font-weight: 900; 
             font-size: 1.25rem; 
-            border: 4px solid #34d399; 
+            border: 4px solid #FFC107; 
             min-height: 64px;
             padding-top: 1.25rem;
             padding-bottom: 1.25rem;
             
-            /* Intense Glow and Shadow */
-            box-shadow: 0 0 15px rgba(37, 211, 102, 1), 0 6px 15px rgba(0, 0, 0, 0.4); 
+            box-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 6px 15px rgba(0, 0, 0, 0.6); 
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             
-            /* Sticker Bounce Animation: Applied by default */
-            animation: sticker-bounce 2.5s infinite ease-in-out;
+            animation: bounceIn 0.5s ease-out, sticker-bounce 2.5s infinite ease-in-out 0.5s;
             transform: translateZ(0); 
         }
-        
-        .cta-button:hover {
-            /* Stronger hover glow and slight lift */
-            box-shadow: 0 0 25px rgba(74, 222, 128, 1), 0 8px 20px rgba(0, 0, 0, 0.5);
-            transform: translateY(-4px) scale(1.03) rotate(0deg); 
-            animation: none; /* Stop jiggle on hover */
+
+        /* --- NEW: SHAKING TEXT ANIMATION FOR CTA SPAN --- */
+        #cta-text {
+            display: inline-block;
+            animation: text-shake 0.2s infinite alternate 1s; /* Start after button loads */
         }
         
-        /* Updated Sticker Bounce Animation */
-        @keyframes sticker-bounce {
-            0%, 100% {
-                transform: translateY(0) rotate(-0.5deg);
-            }
-            25% {
-                transform: translateY(-3px) rotate(0.5deg); 
-            }
-            50% {
-                transform: translateY(0) rotate(0.5deg); 
-            }
-            75% {
-                transform: translateY(-2px) rotate(-0.5deg); 
-            }
+        @keyframes text-shake {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(1px); }
+            100% { transform: translateX(-1px); }
         }
-        
-        /* Animation for subtle entry */
+
+        /* --- Small Text Animation --- */
+        .small-text-animate {
+            animation: fadeIn 1s ease-out 0.8s backwards;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.2); /* Subtle glow on small text */
+        }
+
+        /* --- KEYFRAME ANIMATIONS --- */
         @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes flash {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        @keyframes sticker-bounce {
+            0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+            25% { transform: translateY(-3px) rotate(0.5deg); }
+            50% { transform: translateY(0) rotate(0.5deg); }
+            75% { transform: translateY(-2px) rotate(-0.5deg); }
+        }
+
+        .secure-badge {
+            background-color: #34d399; 
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: -10px; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out 0.1s backwards;
         }
     </style>
     <script>
@@ -154,9 +210,7 @@
     <div id="main-card" class="card rounded-2xl p-6 flex flex-col justify-between">
         
         <div class="flex flex-col items-center mb-10 pt-6">
-            <div class="flex items-center space-x-3">
-                <span class="text-2xl font-bold text-white">WhatsApp</span>
-            </div>
+            <div class="secure-badge">🏆 OFFICIAL PARTNER ACCESS 🏆</div> 
         </div>
 
         <div class="flex flex-col items-center justify-center flex-grow">
@@ -167,18 +221,24 @@
                     <img
                         /* LOGO IMAGE PATH: Updated to 'images/imageyour_logo.png' */
                         src="./images/imageyour_logo.png"
-                        onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=BOOK+ANNA';"
+                        onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
                         alt="Company Logo"
                         class="w-full h-full object-contain rounded-full"
                     >
                 </div>
             </div>
             
-            <h1 class="text-white text-3xl font-extrabold mt-6 mb-2 text-center">
-                GET ID NOW
-            </h1>
-            <p class="text-gray-400 text-sm text-center mb-10">
-                You'll be redirected to chat with us in just a moment.
+            <div id="bonus-container" class="flex flex-col items-center mt-6"> 
+                <div id="bonus-badge" class="bonus-badge">
+                    GET +10% WELCOME BONUS
+                </div>
+                <div id="bonus-timer" class="bonus-timer mt-2">
+                    ⏱️ Offer ends in 05:00
+                </div>
+            </div>
+            
+            <p class="text-gray-300 text-sm text-center mt-6 mb-10 font-medium description-text">
+                Claim your **Exclusive Gaming ID** for instant access.
             </p>
         </div>
         
@@ -186,12 +246,12 @@
             <a id="cta-link" href="#" target="_blank" rel="noopener noreferrer">
                 <button 
                     id="cta-button"
-                    class="cta-button w-full flex items-center justify-center py-4 px-6 text-white rounded-full transition duration-300"
+                    class="cta-button w-full flex items-center justify-center py-4 px-6 text-black rounded-full transition duration-300 uppercase"
                 >
-                    <span id="cta-text">Opening WhatsApp in... 5s 🚀</span>
+                    <span id="cta-text">CLAIM ACCESS IN... 5s</span>
                 </button>
             </a>
-            <p class="text-center text-xs mt-3 text-gray-400">If redirection doesn't work, tap the button above.</p>
+            <p class="text-center text-xs mt-3 text-gray-400 small-text-animate">⚡ Immediate connection to your agent.</p>
         </div>
 
     </div>
@@ -199,7 +259,8 @@
     <script>
         // --- Configuration ---
         const WHATSAPP_PHONE_NUMBER = '918425890638'; 
-        const DEFAULT_MESSAGE = "Hello,i want 🆔";
+        const DEFAULT_MESSAGE = "Hello! I saw your ad and want to claim my Exclusive Gaming ID and the 10% welcome bonus right now.";
+        const BONUS_DURATION_MINUTES = 5; // Set the bonus timer duration
 
         function updateCtaLink() {
             const ctaLink = document.getElementById('cta-link');
@@ -217,21 +278,23 @@
             document.getElementById('cta-button').disabled = false;
         }
 
+        // Function for 5-second automatic redirection
         function autoRedirect(seconds) {
             const ctaButtonText = document.getElementById('cta-text');
             const ctaLink = document.getElementById('cta-link');
 
             let count = seconds;
             
-            ctaButtonText.innerHTML = `Opening WhatsApp in... ${count}s 🚀`;
+            // Set initial text
+            ctaButtonText.innerHTML = `CLAIM ACCESS IN... ${count}s`;
 
             const timer = setInterval(() => {
                 count--;
-                ctaButtonText.innerHTML = `Opening WhatsApp in... ${count}s 🚀`;
+                ctaButtonText.innerHTML = `CLAIM ACCESS IN... ${count}s`;
                 
                 if (count <= 0) {
                     clearInterval(timer);
-                    ctaButtonText.innerHTML = 'Redirecting Now...';
+                    ctaButtonText.innerHTML = 'REDIRECTING NOW...';
                     
                     if (typeof fbq === 'function') {
                         fbq('track', 'Lead');
@@ -241,6 +304,7 @@
                 }
             }, 1000); 
             
+            // Allow user to click immediately 
             ctaLink.onclick = () => {
                 if (typeof fbq === 'function') {
                     fbq('track', 'Lead');
@@ -249,9 +313,52 @@
                 return true; 
             };
         }
+        
+        // --- New Function: Bonus Countdown Timer ---
+        function startBonusTimer() {
+            const timerElement = document.getElementById('bonus-timer');
+            const bonusContainer = document.getElementById('bonus-container');
+            const durationInMs = BONUS_DURATION_MINUTES * 60 * 1000;
+            const endTimeKey = 'bonusEndTime';
 
+            // Check if a timer already exists in session storage
+            let endTime = sessionStorage.getItem(endTimeKey);
+
+            if (!endTime) {
+                // If not, set a new end time
+                endTime = Date.now() + durationInMs;
+                sessionStorage.setItem(endTimeKey, endTime);
+            } else {
+                // Ensure it's a number
+                endTime = parseInt(endTime);
+            }
+
+            const countdown = setInterval(() => {
+                const now = Date.now();
+                const distance = endTime - now;
+
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    timerElement.textContent = '❌ Offer Expired';
+                    // Hide the entire bonus section
+                    bonusContainer.style.display = 'none';
+                    return;
+                }
+
+                // Calculate time remaining
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result
+                timerElement.innerHTML = `⏱️ Offer ends in ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            }, 1000);
+        }
+
+        // Initialize on load and start the redirect
         window.onload = function() {
             updateCtaLink(); 
+            startBonusTimer(); // Start the bonus timer first
             console.log("App Initialized. Starting automatic redirect.");
             autoRedirect(5); 
         }
