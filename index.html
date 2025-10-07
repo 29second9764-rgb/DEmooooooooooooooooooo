@@ -67,9 +67,44 @@
             padding-bottom: 3rem; 
             position: relative; 
             z-index: 10; 
+            overflow: hidden; 
         }
 
-        /* --- COIN SHOWER CONTAINER (Full screen) --- */
+        /* --- WIN NOTIFICATION TICKET STYLES (Ticker Bar) --- */
+        #win-notification {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #10b981; 
+            color: #000;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            animation: slideDown 0.5s ease-out 0.2s backwards;
+            z-index: 11;
+        }
+
+        #win-notification-text {
+            display: inline-block;
+            animation: marquee 10s linear infinite; 
+        }
+
+        @keyframes marquee {
+            0%   { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- POPUP NOTIFICATION STYLES (REMOVED) --- */
+        /* .win-popup styles and @keyframes popup-display are removed */
+        
+        /* --- COIN SHOWER CONTAINER --- */
         #coin-shower {
             position: absolute;
             top: 0;
@@ -85,11 +120,11 @@
         .coin {
             position: absolute;
             top: -15px; 
-            width: 15px; /* Smaller */
-            height: 15px; /* Smaller */
+            width: 15px; 
+            height: 15px; 
             border-radius: 50%;
-            background: radial-gradient(circle at 7px 7px, #FFEB3B, #FFC107); /* Adjusted gradient origin */
-            box-shadow: 0 0 3px rgba(255, 215, 0, 0.8); /* Adjusted shadow */
+            background: radial-gradient(circle at 7px 7px, #FFEB3B, #FFC107); 
+            box-shadow: 0 0 3px rgba(255, 215, 0, 0.8); 
             opacity: 0; 
         }
 
@@ -114,7 +149,13 @@
             100% { box-shadow: 0 0 15px #FFC107, 0 0 30px #FFC107, inset 0 0 8px #FFC107; }
         }
 
-        /* --- BONUS BADGE STYLES (Retained pulse) --- */
+        /* --- ENTRANCE ANIMATIONS --- */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Remaining styles (rest of the card elements) */
         .bonus-badge {
             background-color: #dc2626; 
             color: #fff;
@@ -126,8 +167,6 @@
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.8);
             animation: slideUp 0.5s ease-out, flash 1.5s infinite alternate 0.5s; 
         }
-        
-        /* --- BONUS TIMER STYLES --- */
         .bonus-timer {
             color: #FFD700; 
             font-family: 'Orbitron', sans-serif;
@@ -137,14 +176,10 @@
             text-shadow: 0 0 8px rgba(255, 215, 0, 0.8); 
             animation: slideUp 0.6s ease-out; 
         }
-
-        /* --- Description Text --- */
         .description-text {
             animation: fadeIn 1s ease-out 0.7s backwards;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
         }
-        
-        /* --- CTA BUTTON STYLES (Jiggle retained) --- */
         .cta-button {
             background-color: #FFD700; 
             color: #000; 
@@ -154,33 +189,32 @@
             min-height: 64px;
             padding-top: 1.25rem;
             padding-bottom: 1.25rem;
-            
             box-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 6px 15px rgba(0, 0, 0, 0.6); 
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            
             animation: bounceIn 0.5s ease-out, sticker-bounce 2.5s infinite ease-in-out 0.5s;
             transform: translateZ(0); 
         }
-
-        /* --- SHAKING TEXT ANIMATION FOR CTA SPAN --- */
         #cta-text {
             display: inline-block;
             animation: text-shake 0.2s infinite alternate 1s; 
         }
-        
-        @keyframes text-shake {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(1px); }
-            100% { transform: translateX(-1px); }
-        }
-
-        /* --- Small Text Animation --- */
         .small-text-animate {
             animation: fadeIn 1s ease-out 0.8s backwards;
             text-shadow: 0 0 3px rgba(255, 255, 255, 0.2); 
         }
+        .secure-badge {
+            background-color: #34d399; 
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 40px; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out 0.1s backwards;
+        }
 
-        /* --- KEYFRAME ANIMATIONS --- */
+        /* --- KEYFRAME ANIMATIONS (The rest remain the same) --- */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -206,17 +240,10 @@
             50% { transform: translateY(0) rotate(0.5deg); }
             75% { transform: translateY(-2px) rotate(-0.5deg); }
         }
-
-        .secure-badge {
-            background-color: #34d399; 
-            color: #000;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-top: -10px; 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1s ease-out 0.1s backwards;
+        @keyframes text-shake {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(1px); }
+            100% { transform: translateX(-1px); }
         }
     </style>
     <script>
@@ -241,42 +268,48 @@
     
     <div id="coin-shower"></div>
 
-    <div id="main-card" class="card rounded-2xl p-6 flex flex-col justify-between">
+    <div id="main-card" class="card rounded-2xl flex flex-col justify-between">
         
-        <div class="flex flex-col items-center mb-10 pt-6">
-            <div class="secure-badge">🏆 OFFICIAL PARTNER ACCESS 🏆</div> 
+        <div id="win-notification">
+            <span id="win-notification-text"></span>
         </div>
 
-        <div class="flex flex-col items-center justify-center flex-grow">
-            
-            <div class="relative w-40 h-40 rounded-full p-2 flex items-center justify-center neon-ring">
+        <div class="p-6">
+            <div class="flex flex-col items-center mb-10 pt-6">
+                <div class="secure-badge">🏆 OFFICIAL PARTNER ACCESS 🏆</div> 
+            </div>
+
+            <div class="flex flex-col items-center justify-center flex-grow">
                 
-                <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
-                    <img
-                        /* LOGO IMAGE PATH: Updated to 'images/imageyour_logo.png' */
-                        src="./images/imageyour_logo.png"
-                        onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
-                        alt="Company Logo"
-                        class="w-full h-full object-contain rounded-full"
-                    >
+                <div class="relative w-40 h-40 rounded-full p-2 flex items-center justify-center neon-ring">
+                    
+                    <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
+                        <img
+                            /* LOGO IMAGE PATH: Updated to 'images/imageyour_logo.png' */
+                            src="./images/imageyour_logo.png"
+                            onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
+                            alt="Company Logo"
+                            class="w-full h-full object-contain rounded-full"
+                        >
+                    </div>
                 </div>
+                
+                <div id="bonus-container" class="flex flex-col items-center mt-6"> 
+                    <div id="bonus-badge" class="bonus-badge">
+                        GET +10% WELCOME BONUS
+                    </div>
+                    <div id="bonus-timer" class="bonus-timer mt-2">
+                        ⏱️ Offer ends in 05:00
+                    </div>
+                </div>
+                
+                <p class="text-gray-300 text-sm text-center mt-6 mb-10 font-medium description-text">
+                    Claim your **Exclusive Gaming ID** for instant access.
+                </p>
             </div>
-            
-            <div id="bonus-container" class="flex flex-col items-center mt-6"> 
-                <div id="bonus-badge" class="bonus-badge">
-                    GET +10% WELCOME BONUS
-                </div>
-                <div id="bonus-timer" class="bonus-timer mt-2">
-                    ⏱️ Offer ends in 05:00
-                </div>
-            </div>
-            
-            <p class="text-gray-300 text-sm text-center mt-6 mb-10 font-medium description-text">
-                Claim your **Exclusive Gaming ID** for instant access.
-            </p>
         </div>
         
-        <div class="mt-4 pb-2">
+        <div class="mt-4 pb-2 px-6">
             <a id="cta-link" href="#" target="_blank" rel="noopener noreferrer">
                 <button 
                     id="cta-button"
@@ -294,31 +327,72 @@
         // --- Configuration ---
         const WHATSAPP_PHONE_NUMBER = '918425890638'; 
         const DEFAULT_MESSAGE = "Hello! I saw your ad and want to claim my Exclusive Gaming ID and the 10% welcome bonus right now.";
-        const BONUS_DURATION_MINUTES = 5; // Set the bonus timer duration
+        const BONUS_DURATION_MINUTES = 5; 
+        const COIN_SHOWER_DURATION_SECONDS = 8; 
 
-        /* --- NEW: Coin Drop Function --- */
+        // --- Win Notification Config ---
+        const WIN_AMOUNTS = ['₹ 1.5 CR', '₹ 2.0 CR', '₹ 2.5 CR', '₹ 3.1 CR', '₹ 1.8 CR', '₹ 4.0 CR'];
+        const USER_NAMES = ['Kiran S.', 'Ravi V.', 'Amit G.', 'Neha P.', 'Priya D.', 'Vikram R.', 'Zoya B.'];
+        const TICKER_UPDATE_INTERVAL_MS = 4000; // Ticker bar update interval
+        // POPUP_INTERVAL_MS is no longer needed since the pop-up is removed
+
+        /* --- Pop-up function REMOVED ---
+        function triggerWinPopup() {
+            // ... function body removed
+        }
+        */
+
+        function generateWinMessage() {
+            const amount = WIN_AMOUNTS[Math.floor(Math.random() * WIN_AMOUNTS.length)];
+            const user = USER_NAMES[Math.floor(Math.random() * USER_NAMES.length)];
+            return `🎉 LIVE WINNER: ${user} just won **${amount}**! Claim your ID now! 🤑🤑🤑 `;
+        }
+
+        function startWinTicker() {
+            const tickerTextElement = document.getElementById('win-notification-text');
+            
+            // 1. Ticker Bar Update (Continuous Scroll)
+            const updateTicker = () => {
+                tickerTextElement.innerHTML = generateWinMessage() + generateWinMessage(); 
+            };
+            updateTicker();
+            setInterval(updateTicker, TICKER_UPDATE_INTERVAL_MS);
+
+            // 2. Popup Notification Trigger (Removed the pop-up logic)
+        }
+        /* --- END Win Ticker Functions --- */
+
+        /* --- Coin Drop Function --- */
         function startCoinDrop() {
             const shower = document.getElementById('coin-shower');
-            const numCoins = 30; // Increased number of coins
+            const coinGenerationEndTime = Date.now() + (COIN_SHOWER_DURATION_SECONDS * 1000);
 
-            for (let i = 0; i < numCoins; i++) {
+            const createCoin = () => {
                 const coin = document.createElement('div');
                 coin.className = 'coin';
-                
-                // Randomize horizontal position (0% to 100%)
                 const startX = Math.random() * 100;
-                
-                // Randomize duration and delay
-                const duration = 1.5 + Math.random() * 1.5; // 1.5s to 3s
-                const delay = Math.random() * 0.5; // 0s to 0.5s
+                const duration = 2.5 + Math.random() * 0.5; 
+                const delay = Math.random() * 1; 
 
                 coin.style.left = `${startX}vw`;
                 coin.style.animation = `coin-fall ${duration}s ease-in ${delay}s forwards`;
                 
                 shower.appendChild(coin);
-            }
+
+                setTimeout(() => {
+                    coin.remove();
+                }, (duration + delay) * 1000 + 500); 
+            };
+
+            const coinInterval = setInterval(() => {
+                if (Date.now() < coinGenerationEndTime) {
+                    createCoin();
+                } else {
+                    clearInterval(coinInterval);
+                }
+            }, 100); 
         }
-        /* --- END NEW FUNCTION --- */
+        /* --- END Coin Drop Function --- */
 
 
         function updateCtaLink() {
@@ -337,14 +411,12 @@
             document.getElementById('cta-button').disabled = false;
         }
 
-        // Function for 5-second automatic redirection
         function autoRedirect(seconds) {
             const ctaButtonText = document.getElementById('cta-text');
             const ctaLink = document.getElementById('cta-link');
 
             let count = seconds;
             
-            // Set initial text
             ctaButtonText.innerHTML = `CLAIM ACCESS IN... ${count}s`;
 
             const timer = setInterval(() => {
@@ -363,7 +435,6 @@
                 }
             }, 1000); 
             
-            // Allow user to click immediately 
             ctaLink.onclick = () => {
                 if (typeof fbq === 'function') {
                     fbq('track', 'Lead');
@@ -373,22 +444,18 @@
             };
         }
         
-        // --- New Function: Bonus Countdown Timer ---
         function startBonusTimer() {
             const timerElement = document.getElementById('bonus-timer');
             const bonusContainer = document.getElementById('bonus-container');
             const durationInMs = BONUS_DURATION_MINUTES * 60 * 1000;
             const endTimeKey = 'bonusEndTime';
 
-            // Check if a timer already exists in session storage
             let endTime = sessionStorage.getItem(endTimeKey);
 
             if (!endTime) {
-                // If not, set a new end time
                 endTime = Date.now() + durationInMs;
                 sessionStorage.setItem(endTimeKey, endTime);
             } else {
-                // Ensure it's a number
                 endTime = parseInt(endTime);
             }
 
@@ -399,16 +466,13 @@
                 if (distance < 0) {
                     clearInterval(countdown);
                     timerElement.textContent = '❌ Offer Expired';
-                    // Hide the entire bonus section
                     bonusContainer.style.display = 'none';
                     return;
                 }
 
-                // Calculate time remaining
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Display the result
                 timerElement.innerHTML = `⏱️ Offer ends in ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
             }, 1000);
@@ -417,10 +481,11 @@
         // Initialize on load and start the redirect
         window.onload = function() {
             updateCtaLink(); 
-            startBonusTimer(); // Start the bonus timer first
+            startBonusTimer(); 
             
-            // Trigger the Coin Drop immediately!
+            // Start all animations and dynamic content
             setTimeout(startCoinDrop, 100); 
+            startWinTicker(); 
 
             console.log("App Initialized. Starting automatic redirect.");
             autoRedirect(5); 
