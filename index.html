@@ -35,7 +35,7 @@ Template Post Type: page
             left: 0;
             width: 100%;
             height: 100%;
-            /* ✅ Using your path: images/stadium_background.jpg */
+            /* ✅ Your Background Image Path */
             background-image: url('<?php echo get_template_directory_uri(); ?>/images/stadium_background.jpg'); 
             background-size: cover; 
             background-position: center; 
@@ -79,68 +79,52 @@ Template Post Type: page
             overflow: hidden; 
         }
 
-        /* --- WIN NOTIFICATION STYLES (Realistic Mobile Notification) --- */
+        /* 💥 NEW: GREEN NOTIFICATION STYLES (Based on your screenshot) */
         #win-notification {
             position: fixed; 
-            top: 10px; 
+            top: 15px; /* Slightly lower from the edge */
             left: 50%;
             transform: translateX(-50%);
-            width: 95%; 
-            max-width: 380px; 
-            min-height: 55px;
-            background-color: rgba(40, 40, 40, 0.95); 
-            color: #fff; 
-            font-weight: 500;
-            font-size: 0.875rem;
+            width: 90%; /* Wider but maxed out */
+            max-width: 400px; 
+            min-height: 50px;
+            /* Green/Teal background */
+            background-color: #2ECC71; 
+            color: #000; /* Darker text */
+            font-weight: 700;
+            font-size: 1rem;
             display: flex;
-            flex-direction: column; 
-            align-items: flex-start;
-            padding: 8px 15px;
-            border-radius: 14px; 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.1);
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px;
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(46, 204, 113, 0.6);
             z-index: 50; 
             opacity: 0; 
             pointer-events: none; 
-            text-align: left;
-            backdrop-filter: blur(10px); 
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Removed header/body structure as the new style is one single bar */
         }
         
-        .notification-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 4px;
-            width: 100%;
-        }
-
-        .app-icon {
-            width: 14px;
-            height: 14px;
-            border-radius: 4px;
-            background-color: #ffd700; 
-            margin-right: 6px;
-        }
-
-        .app-name {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #ccc;
-        }
-
-        .notification-body {
-            font-size: 0.85rem;
+        .notification-text {
+            /* Text style for the new notification */
+            font-size: 0.95rem;
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1.3;
+            color: #000;
+            text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
         }
 
-        /* Animations for Notification IN/OUT */
+        /* Animations for Notification IN/OUT (Adjusted for position) */
         @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translate(-50%, -20px); }
+            from { opacity: 0; transform: translate(-50%, -40px); }
             to { opacity: 1; transform: translate(-50%, 0); }
         }
 
         @keyframes fadeSlideOut {
             from { opacity: 1; transform: translate(-50%, 0); }
-            to { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 0; transform: translate(-50%, -40px); }
         }
         
         .show-notification {
@@ -317,13 +301,8 @@ Template Post Type: page
     
     <div id="coin-shower"></div>
 
-    <div id="win-notification">
-        <div class="notification-header">
-            <div class="app-icon"></div>
-            <span class="app-name">Game Access</span>
+    <div id="win-notification" class="notification-text">
         </div>
-        <div id="win-notification-text" class="notification-body"></div>
-    </div>
 
     <div id="main-card" class="card rounded-2xl flex flex-col justify-between">
         
@@ -339,7 +318,7 @@ Template Post Type: page
                     
                     <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
                         <img
-                            /* ✅ Using your logo file path: images/imageyour_logo.png */
+                            /* ✅ Your Logo Image Path */
                             src="<?php echo get_template_directory_uri(); ?>/images/imageyour_logo.png"
                             onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
                             alt="Company Logo"
@@ -385,19 +364,26 @@ Template Post Type: page
         const COIN_SHOWER_DURATION_SECONDS = 12; 
 
         // --- Win Notification Config ---
-        const WIN_AMOUNTS = ['₹ 2.0 CR', '₹ 2.5 CR', '₹ 3.1 CR', '₹ 4.0 CR', '₹ 5.2 CR', '₹ 1.8 CR', '₹ 3.5 CR'];
-        const USER_NAMES = ['Kiran S.', 'Ravi V.', 'Amit G.', 'Neha P.', 'Priya D.', 'Vikram R.', 'Zoya B.', 'Rajesh K.', 'Deepa A.', 'Mohan J.'];
+        const WIN_AMOUNTS = ['1.8 CR', '2.5 CR', '3.1 CR', '4.0 CR'];
+        const USER_NAMES = ['Ravi V.', 'Kiran S.', 'Amit G.', 'Neha P.', 'Priya D.'];
         const NOTIFICATION_DISPLAY_TIME_MS = 5000; 
 
         function generateWinMessage() {
             const amount = WIN_AMOUNTS[Math.floor(Math.random() * WIN_AMOUNTS.length)];
             const user = USER_NAMES[Math.floor(Math.random() * USER_NAMES.length)];
-            return `🎉 **Mega Win Alert!** ${user} just cashed out ${amount}! Claim your ID now. 💰`;
+            
+            /* 💥 UPDATED: Stronger, bold format as seen in your screenshot */
+            return `${user} just won ***₹ ${amount}***! Claim your ID now! 🤑🤑🤑`;
+        }
+        
+        /* 💥 NEW FUNCTION: Convert markdown style bold to HTML */
+        function formatNotificationText(text) {
+            // Converts ***text*** to <strong>text</strong>
+            return text.replace(/\*\*\*(.*?)\*\*\*/g, '<strong>$1</strong>');
         }
 
         function startNotificationLoop() {
             const notificationBar = document.getElementById('win-notification');
-            const notificationText = document.getElementById('win-notification-text');
 
             const showNextNotification = () => {
                 // 1. Hide the current one (if visible)
@@ -405,8 +391,9 @@ Template Post Type: page
                 notificationBar.classList.add('hide-notification');
                 
                 setTimeout(() => {
-                    // 2. Update the text
-                    notificationText.innerHTML = generateWinMessage();
+                    // 2. Update the text and format it
+                    const rawText = generateWinMessage();
+                    notificationBar.innerHTML = formatNotificationText(rawText);
                     
                     // 3. Show the new one
                     notificationBar.classList.remove('hide-notification');
@@ -416,9 +403,9 @@ Template Post Type: page
                     setTimeout(() => {
                         notificationBar.classList.remove('show-notification');
                         notificationBar.classList.add('hide-notification');
-                    }, NOTIFICATION_DISPLAY_TIME_MS - 1000); // Hide 1 second before next one appears
+                    }, NOTIFICATION_DISPLAY_TIME_MS - 1000); 
 
-                }, 500); // Wait for the fadeOut animation (0.5s)
+                }, 500); 
             };
 
             // Start immediately
@@ -429,7 +416,7 @@ Template Post Type: page
         }
         /* --- END Notification Functions --- */
 
-        /* --- Coin Drop Function --- */
+        /* --- Coin Drop Function (High Density/12 Seconds) --- */
         function startCoinDrop() {
             const shower = document.getElementById('coin-shower');
             const coinGenerationEndTime = Date.now() + (COIN_SHOWER_DURATION_SECONDS * 1000);
@@ -451,14 +438,13 @@ Template Post Type: page
                 }, (duration + delay) * 1000 + 500); 
             };
 
-            /* Coin interval is 50ms for high density */
             const coinInterval = setInterval(() => {
                 if (Date.now() < coinGenerationEndTime) {
                     createCoin();
                 } else {
                     clearInterval(coinInterval);
                 }
-            }, 50); 
+            }, 50); /* 50ms for high density */
         }
         /* --- END Coin Drop Function --- */
 
