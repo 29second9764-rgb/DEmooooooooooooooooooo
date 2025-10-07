@@ -35,8 +35,8 @@ Template Post Type: page
             left: 0;
             width: 100%;
             height: 100%;
-            /* ⚠️ IMPORTANT: Change the background-image path if you use it! */
-            background-image: url('./images/stadium_background.jpg'); 
+            /* 💥 UPDATED: Your Background Image Path */
+            background-image: url('<?php echo get_template_directory_uri(); ?>/images/stadium_background.jpg'); 
             background-size: cover; 
             background-position: center; 
             filter: blur(2px) brightness(0.7); 
@@ -88,13 +88,12 @@ Template Post Type: page
             width: 95%; 
             max-width: 380px; 
             min-height: 55px;
-            /* UPDATED: Darker, realistic notification style */
             background-color: rgba(40, 40, 40, 0.95); 
-            color: #fff; /* White text for contrast */
+            color: #fff; 
             font-weight: 500;
             font-size: 0.875rem;
             display: flex;
-            flex-direction: column; /* Stack header and body */
+            flex-direction: column; 
             align-items: flex-start;
             padding: 8px 15px;
             border-radius: 14px; 
@@ -103,7 +102,7 @@ Template Post Type: page
             opacity: 0; 
             pointer-events: none; 
             text-align: left;
-            backdrop-filter: blur(10px); /* Add blur effect for realism */
+            backdrop-filter: blur(10px); 
         }
         
         .notification-header {
@@ -117,7 +116,7 @@ Template Post Type: page
             width: 14px;
             height: 14px;
             border-radius: 4px;
-            background-color: #ffd700; /* Gold color for icon */
+            background-color: #ffd700; 
             margin-right: 6px;
         }
 
@@ -340,7 +339,7 @@ Template Post Type: page
                     
                     <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
                         <img
-                            /* WP CHANGE: Use the template directory to find the image */
+                            /* 💥 UPDATED: Your Logo Image Path */
                             src="<?php echo get_template_directory_uri(); ?>/images/imageyour_logo.png"
                             onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
                             alt="Company Logo"
@@ -383,7 +382,6 @@ Template Post Type: page
         const WHATSAPP_PHONE_NUMBER = '918425890638'; 
         const DEFAULT_MESSAGE = "Hello! I saw your ad and want to claim my Exclusive Gaming ID and the 10% welcome bonus right now.";
         const BONUS_DURATION_MINUTES = 5; 
-        /* UPDATED: COIN SHOWER DURATION (12 seconds) */
         const COIN_SHOWER_DURATION_SECONDS = 12; 
 
         // --- Win Notification Config ---
