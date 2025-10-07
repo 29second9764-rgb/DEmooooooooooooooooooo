@@ -20,19 +20,32 @@
             overflow: hidden;
         }
 
-        /* Simulate the blurred stadium background. */
+        /* Simulate the blurred stadium background. (DEFAULT: LAPTOP/DESKTOP) */
         .stadium-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* BACKGROUND IMAGE PATH: Updated to 'images/stadium_background.jpg' */
             background-image: url('./images/stadium_background.jpg'); 
-            background-size: cover;
-            background-position: center;
-            filter: blur(2px) brightness(0.7); /* Maintain the blur effect */
+            background-size: cover; /* Default behavior: cover screen, crops ends */
+            background-position: center; 
+            filter: blur(2px) brightness(0.7); 
             z-index: -1;
+        }
+        
+        /* 🔥 FIX FOR PHONE SCREENS 🔥 */
+        /* Media query targets screens 480px wide or less (typical phones) */
+        @media (max-width: 480px) {
+            .stadium-bg {
+                /* Option 1: Use 'contain' to show the whole image (will create black bars on top/bottom) */
+                background-size: contain; 
+                background-repeat: no-repeat;
+                /* Option 2 (Alternative - uncomment to try): Keep 'cover' but force the focus to the top/center.
+                background-size: cover; 
+                background-position: center top; 
+                */
+            }
         }
         
         /* Dark overlay to enhance the card contrast */
@@ -185,13 +198,9 @@
     
     <script>
         // --- Configuration ---
-        // WhatsApp Number (Updated to Indian number)
         const WHATSAPP_PHONE_NUMBER = '918425890638'; 
-        
-        // Default Message - Set to Thai/English friendly greeting
         const DEFAULT_MESSAGE = "Hello,i want 🆔";
 
-        // Function to update the WhatsApp link
         function updateCtaLink() {
             const ctaLink = document.getElementById('cta-link');
             
@@ -208,14 +217,12 @@
             document.getElementById('cta-button').disabled = false;
         }
 
-        // Function for automatic redirection
         function autoRedirect(seconds) {
             const ctaButtonText = document.getElementById('cta-text');
             const ctaLink = document.getElementById('cta-link');
 
             let count = seconds;
             
-            // Set initial text before countdown
             ctaButtonText.innerHTML = `Opening WhatsApp in... ${count}s 🚀`;
 
             const timer = setInterval(() => {
@@ -226,34 +233,27 @@
                     clearInterval(timer);
                     ctaButtonText.innerHTML = 'Redirecting Now...';
                     
-                    // Trigger Pixel Lead Event before redirecting
                     if (typeof fbq === 'function') {
                         fbq('track', 'Lead');
                     }
                     
-                    // Trigger the link
                     window.location.href = ctaLink.href;
                 }
-            }, 1000); // This interval is 1 second, the initial count sets the duration.
+            }, 1000); 
             
-            // Allow user to click immediately if they don't want to wait
             ctaLink.onclick = () => {
-                // Trigger Pixel Lead Event on click
                 if (typeof fbq === 'function') {
                     fbq('track', 'Lead');
                 }
                 clearInterval(timer);
-                return true; // Allow link navigation
+                return true; 
             };
         }
 
-
-        // Initialize on load and start the redirect
         window.onload = function() {
-            updateCtaLink(); // Set the correct link with the default message
+            updateCtaLink(); 
             console.log("App Initialized. Starting automatic redirect.");
-            // 🎯 CHANGED THIS LINE: The parameter is now 5 instead of 1 
-            autoRedirect(5); // Start the 5-second countdown
+            autoRedirect(5); 
         }
     </script>
 </body>
