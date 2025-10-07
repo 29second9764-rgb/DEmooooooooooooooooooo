@@ -35,7 +35,7 @@ Template Post Type: page
             left: 0;
             width: 100%;
             height: 100%;
-            /* 💥 UPDATED: Your Background Image Path */
+            /* ✅ Using your path: images/stadium_background.jpg */
             background-image: url('<?php echo get_template_directory_uri(); ?>/images/stadium_background.jpg'); 
             background-size: cover; 
             background-position: center; 
@@ -339,7 +339,7 @@ Template Post Type: page
                     
                     <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center shadow-lg p-4">
                         <img
-                            /* 💥 UPDATED: Your Logo Image Path */
+                            /* ✅ Using your logo file path: images/imageyour_logo.png */
                             src="<?php echo get_template_directory_uri(); ?>/images/imageyour_logo.png"
                             onerror="this.onerror=null; this.src='https://placehold.co/120x120/000000/ffffff?text=YOUR+ID';"
                             alt="Company Logo"
@@ -369,7 +369,7 @@ Template Post Type: page
                     id="cta-button"
                     class="cta-button w-full flex items-center justify-center py-4 px-6 text-black rounded-full transition duration-300 uppercase"
                 >
-                    <span id="cta-text">CLAIM ACCESS NOW</span>
+                    <span id="cta-text">CLAIM YOUR INSTANT BONUS & ID</span>
                 </button>
             </a>
             <p class="text-center text-xs mt-3 text-gray-400 small-text-animate">⚡ Immediate connection to your agent.</p>
@@ -429,10 +429,9 @@ Template Post Type: page
         }
         /* --- END Notification Functions --- */
 
-        /* --- Coin Drop Function (UPDATED) --- */
+        /* --- Coin Drop Function --- */
         function startCoinDrop() {
             const shower = document.getElementById('coin-shower');
-            // Use the updated duration
             const coinGenerationEndTime = Date.now() + (COIN_SHOWER_DURATION_SECONDS * 1000);
 
             const createCoin = () => {
@@ -452,7 +451,7 @@ Template Post Type: page
                 }, (duration + delay) * 1000 + 500); 
             };
 
-            /* UPDATED: Coin interval to 50ms for high density */
+            /* Coin interval is 50ms for high density */
             const coinInterval = setInterval(() => {
                 if (Date.now() < coinGenerationEndTime) {
                     createCoin();
@@ -531,7 +530,7 @@ Template Post Type: page
             
             // Start all animations and dynamic content
             setTimeout(startCoinDrop, 100); 
-            startNotificationLoop(); // Start the new notification sequence
+            startNotificationLoop(); 
 
             console.log("App Initialized. Auto-redirect disabled.");
         }
